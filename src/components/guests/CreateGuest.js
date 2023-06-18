@@ -17,7 +17,7 @@ SectionTitle.propTypes = {
 
 function CreateGuest() {
   return (
-    <Create title="Create a room">
+    <Create title="Create a Guest">
       <SimpleForm
         defaultValue={{
           email: '',
@@ -36,6 +36,10 @@ function CreateGuest() {
         <SectionTitle label="Full name" />
         <Box>
           <TextInput source="name" fullWidth />
+        </Box>
+        <SectionTitle label="Phone number" />
+        <Box>
+          <TextInput source="sdt" fullWidth />
         </Box>
         <SectionTitle label="Password" />
         <Box>

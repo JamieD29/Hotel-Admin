@@ -23,7 +23,7 @@ SectionTitle.propTypes = {
 
 function CreateInvoice() {
   return (
-    <Create title="Create a invoice">
+    <Create title="Create a invoice" component="div">
       <SimpleForm
         defaultValue={{
           userId: 0,

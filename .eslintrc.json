@@ -20,20 +20,17 @@
     "react/jsx-props-no-spreading": "off",
     "react/react-in-jsx-scope": "off",
     "no-unused-vars": "warn",
+    "arrow-body-style": [
+      "error",
+      "as-needed",
+      { "requireReturnForObjectLiteral": true }
+    ],
     "prettier/prettier": [
       "error",
       {
         "endOfLine": "auto"
       }
     ],
-    "import/no-extraneous-dependencies": [
-      "error",
-      {
-        "devDependencies": false,
-        "dependencies": false,
-        "optionalDependencies": false,
-        "peerDependencies": false
-      }
-    ]
+    "import/no-extraneous-dependencies": 0
   }
 }

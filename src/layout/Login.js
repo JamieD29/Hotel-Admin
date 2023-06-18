@@ -19,7 +19,7 @@ import {
 } from 'react-admin';
 
 function MyLoginPage() {
-  const [username, setEmail] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const login = useLogin();
@@ -27,9 +27,7 @@ function MyLoginPage() {
 
   const handleSubmit = () => {
     // will call authProvider.login({ email, password })
-    login({ username, password }).catch(() =>
-      notify('Invalid email or password'),
-    );
+    login({ email, password }).catch(() => notify('Invalid email or password'));
   };
 
   return (
@@ -75,9 +73,9 @@ function MyLoginPage() {
               </Typography>
               <TextInput
                 name="email"
-                type="text"
+                type="email"
                 placeholder="Enter..."
-                value={username}
+                value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 fullWidth
               />

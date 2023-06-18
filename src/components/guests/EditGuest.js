@@ -1,6 +1,12 @@
 import React from 'react';
-import { Edit, SimpleForm, TextInput, useRecordContext } from 'react-admin';
-import { Box, Typography } from '@mui/material';
+import {
+  Edit,
+  SimpleForm,
+  TextInput,
+  useGetRecordId,
+  useRecordContext,
+} from 'react-admin';
+import { Box, Typography, recomposeColor } from '@mui/material';
 import PropTypes from 'prop-types';
 import Aside from './Aside';
 
@@ -22,8 +28,9 @@ function UserType() {
 }
 
 function EditGuest() {
+  const id = useGetRecordId();
   return (
-    <Edit title={<UserType />} aside={<Aside />}>
+    <Edit title={<UserType />} aside={<Aside id={id} />}>
       <SimpleForm>
         <TextInput disabled source="id" />
         <SectionTitle label="Email" />
