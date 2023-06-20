@@ -1,23 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Decimal } from 'decimal.js';
 import DollarIcon from '@mui/icons-material/AttachMoney';
 import CardWithIcon from './utils/components/CardWithIcon';
 
 function MonthlyRevenue() {
-  // const { value } = props;
-
+  const token = localStorage.getItem('token');
   const [value, setValue] = useState();
+
+  if (value === undefined) {
+    setValue('0');
+  }
   useEffect(() => {
     axios
-      .post('http://localhost:3000/payment/revenue')
+      .post(
+        'http://localhost:3000/payment/revenue',
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      )
       .then((respond) => {
-        console.log(respond);
-        setValue(respond.data.data);
+        const result = respond.data.data;
+        const number = new Decimal(result);
+        const formattedNumber = number.toFixed();
+
+        setValue(formattedNumber);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => err);
   }, []);
+
   return (
     <CardWithIcon
       to="/invoice"

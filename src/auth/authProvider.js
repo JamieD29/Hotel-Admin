@@ -14,6 +14,7 @@ const authProvider = {
       })
       .then((data) => {
         localStorage.setItem('token', data.access_token);
+        localStorage.setItem('userId', data.user.id);
       });
   },
   logout: () => {
@@ -31,7 +32,24 @@ const authProvider = {
     // other error code (404, 500, etc): no need to log out
     return Promise.resolve();
   },
-  getIdentity: () => Promise.resolve(),
+  getIdentity: () =>
+    fetch(`http://localhost:3000/users/${localStorage.getItem('userId')}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    })
+      .then((response) => {
+        if (response.status < 200 || response.status >= 300) {
+          throw new Error(response.statusText);
+        }
+        return response.json();
+      })
+      .then((data) =>
+        Promise.resolve({
+          id: data.id,
+          fullName: data.name,
+        }),
+      ),
   getPermissions: () => Promise.resolve(),
 };
 

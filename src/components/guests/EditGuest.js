@@ -1,12 +1,15 @@
 import React from 'react';
 import {
   Edit,
+  PasswordInput,
+  SelectInput,
   SimpleForm,
   TextInput,
+  email,
   useGetRecordId,
   useRecordContext,
 } from 'react-admin';
-import { Box, Typography, recomposeColor } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import Aside from './Aside';
 
@@ -27,35 +30,87 @@ function UserType() {
   return <span>User {record ? `"${record.id}"` : ''}</span>;
 }
 
+const required =
+  (message = 'Required') =>
+  (value) =>
+    value ? undefined : message;
+const minValue =
+  (min, message = 'Too small') =>
+  (value) =>
+    value && value.length < min ? message : undefined;
+
+const maxLength =
+  (max, message = 'Over-length range') =>
+  (value) =>
+    value && value.length > max ? message : undefined;
+
+const nameRegex =
+  (regexRule, message = 'Do not contain number') =>
+  (value) =>
+    regexRule.test(value) ? message : undefined;
+
+const phoneRegex =
+  (regexRule, message = 'Only number') =>
+  (value) =>
+    regexRule.test(value) ? undefined : message;
+
+const validateEmail = [required(), email()];
+
+const validateName = [required(), minValue(3), nameRegex(/\d/)];
+
+const validatePassword = [required(), minValue(8)];
+
+const validatePhoneNumber = [required(), maxLength(10), phoneRegex(/^\d+$/)];
+
+const validateRole = [required()];
+
 function EditGuest() {
   const id = useGetRecordId();
   return (
     <Edit title={<UserType />} aside={<Aside id={id} />}>
       <SimpleForm>
-        <TextInput disabled source="id" />
-        <SectionTitle label="Email" />
-        <Box>
-          <TextInput source="email" fullWidth />
-        </Box>
-        <SectionTitle label="Phone number" />
-        <Box>
-          <TextInput source="sdt" fullWidth />
-        </Box>
-        <SectionTitle label="Full name" />
-        <Box>
-          <TextInput source="name" fullWidth />
-        </Box>
-        <SectionTitle label="Password" />
-        <Box>
-          <TextInput disabled source="password" fullWidth />
-        </Box>
-        <SectionTitle label="Change Password" />
-        <Box>
-          <TextInput source="password" fullWidth />
-        </Box>
-        <SectionTitle label="Role" />
-        <Box>
-          <TextInput source="role" fullWidth />
+        <Box width={{ xs: '100%', xl: 800 }}>
+          <TextInput disabled source="id" />
+          <SectionTitle label="Email" />
+          <Box>
+            <TextInput source="email" validate={validateEmail} fullWidth />
+          </Box>
+          <SectionTitle label="Phone number" />
+          <Box>
+            <TextInput source="sdt" validate={validatePhoneNumber} fullWidth />
+          </Box>
+          <SectionTitle label="Full name" />
+          <Box>
+            <TextInput source="name" validate={validateName} fullWidth />
+          </Box>
+
+          <Grid container spacing={2} width={{ xs: '100%', xl: 800 }}>
+            <Grid item>
+              <SectionTitle label="Password" />
+              <PasswordInput disabled source="password" fullWidth />
+            </Grid>
+
+            <Grid item>
+              <SectionTitle label="Change Password" />
+              <PasswordInput
+                source="password"
+                validate={validatePassword}
+                fullWidth
+              />
+            </Grid>
+          </Grid>
+
+          <SectionTitle label="Role" />
+          <Box>
+            <SelectInput
+              source="role"
+              validate={validateRole}
+              choices={[
+                { id: 'admin', name: 'admin' },
+                { id: 'guest', name: 'guest' },
+              ]}
+            />
+          </Box>
         </Box>
       </SimpleForm>
     </Edit>

@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useTranslate } from 'react-admin';
 import axios from 'axios';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import CardWithIcon from './utils/components/CardWithIcon';
 
-function GuestTotal(props) {
-  // const { value } = props;
+function GuestTotal() {
   const token = localStorage.getItem('token');
   const [user, setUsers] = useState();
-  const value = user?.length;
+  const range = user?.length;
+  const value = String(range);
   useEffect(() => {
     axios
       .get('http://localhost:3000/users', {
@@ -19,9 +18,7 @@ function GuestTotal(props) {
       .then((respond) => {
         setUsers(respond.data);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => err.message);
   }, []);
   return (
     <CardWithIcon

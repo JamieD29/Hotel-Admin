@@ -28,14 +28,39 @@ function ShowInvoice() {
 
   return (
     <Show title={invoiceTitle} aside={<Aside id={invoice} />}>
-      <SimpleShowLayout>
+      <SimpleShowLayout
+        sx={{
+          fontSize: '18px',
+        }}
+      >
         <TextField disabled source="id" />
 
-        <TextField label="Total" source="total_price" fullWidth />
+        <TextField
+          label="Total"
+          source="total_price"
+          fullWidth
+          sx={{
+            fontSize: '24px',
+          }}
+        />
 
-        <DateField label="Created" source="invoice_date" fullWidth />
+        <DateField
+          label="Created"
+          source="invoice_date"
+          fullWidth
+          sx={{
+            fontSize: '24px',
+          }}
+        />
 
-        <TextField label="Guest" source="user.name" fullWidth />
+        <TextField
+          label="Guest"
+          source="user.name"
+          fullWidth
+          sx={{
+            fontSize: '24px',
+          }}
+        />
       </SimpleShowLayout>
     </Show>
   );

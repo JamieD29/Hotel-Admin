@@ -29,16 +29,23 @@ const dataProvider = {
   create: (resource, params) =>
     axiosInstance.post(`/${resource}`, params.data).then((response) => {
       return {
-        data: response.data,
+        data: {
+          id: response.data.id,
+          ...response.data,
+        },
       };
     }),
   update: async (resource, params) => {
     const { id } = params;
+    const tempId = id;
     return axiosInstance
       .put(`/${resource}/${id}`, params.data)
       .then((response) => {
         return {
-          data: response.data,
+          data: {
+            id: Number(tempId),
+            ...response.data,
+          },
         };
       });
   },

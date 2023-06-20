@@ -20,7 +20,6 @@ function ListGuest() {
         <TextField source="email" />
         <TextField source="sdt" />
         <TextField source="name" />
-        <TextField source="password" />
         <TextField source="role" />
         <EditButton />
         <ShowButton />

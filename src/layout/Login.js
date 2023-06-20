@@ -10,18 +10,12 @@ import {
 import LockIcon from '@mui/icons-material/Lock';
 import * as React from 'react';
 import { useState } from 'react';
-import {
-  useLogin,
-  useNotify,
-  Notification,
-  Form,
-  TextInput,
-} from 'react-admin';
+import { useLogin, useNotify, Form, TextInput } from 'react-admin';
 
 function MyLoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
   const login = useLogin();
   const notify = useNotify();
 
@@ -64,12 +58,12 @@ function MyLoginPage() {
               color: (theme) => theme.palette.grey[500],
             }}
           >
-            Hint: john / 123
+            Hint: abc@gmail.com / 123456
           </Box>
           <Box sx={{ padding: '0 1em 1em 1em' }}>
             <Box sx={{ marginTop: '1em' }}>
               <Typography variant="h6" gutterBottom>
-                Username
+                E-mail
               </Typography>
               <TextInput
                 name="email"

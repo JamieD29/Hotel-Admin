@@ -32,9 +32,14 @@ Aside.propTypes = {
 function EventList({ idDetail }) {
   const [dataDetail, setDataDetail] = useState();
   const [locale] = useLocaleState();
+  const token = localStorage.getItem('token');
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/invoice/user/${idDetail}`)
+      .get(`http://localhost:3000/invoice/user/${idDetail}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((respond) => {
         setDataDetail(respond.data);
       })

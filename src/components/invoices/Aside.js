@@ -30,15 +30,18 @@ Aside.propTypes = {
 function EventList({ idDetail }) {
   const [dataDetail, setDataDetail] = useState();
   const [locale] = useLocaleState();
+  const token = localStorage.getItem('token');
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/invoice-detail/${idDetail}`)
+      .get(`http://localhost:3000/invoice-detail/${idDetail}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((respond) => {
         setDataDetail(respond.data);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => err.message);
   }, []);
   return (
     <Box ml={2}>
@@ -59,9 +62,9 @@ function EventList({ idDetail }) {
               <Typography variant="h6">
                 Room {detail.room.id} - {detail.room.type.toUpperCase()}
               </Typography>
-              <Typography variant="body1">Price {detail.room.price}</Typography>
+              <Typography variant="body1">Price:{detail.room.price}</Typography>
               <Typography variant="body1">
-                Bed {detail.room.bed_count}
+                Bed(s): {detail.room.bed_count}
               </Typography>
             </StepContent>
           </Step>
