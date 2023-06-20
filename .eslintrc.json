@@ -3,6 +3,11 @@
     "browser": true,
     "es2021": true
   },
+  "settings": {
+    "react": {
+      "version": "latest"
+    }
+  },
   "extends": ["plugin:react/recommended", "airbnb", "prettier"],
   "overrides": [],
   "parserOptions": {
@@ -11,19 +16,22 @@
   },
   "plugins": ["react", "prettier"],
   "rules": {
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-props-no-spreading": "off",
+    "react/react-in-jsx-scope": "off",
+    "no-unused-vars": "warn",
+    "arrow-body-style": [
+      "error",
+      "as-needed",
+      { "requireReturnForObjectLiteral": true }
+    ],
     "prettier/prettier": [
       "error",
       {
-        "printWidth": 80,
-        "trailingComma": "es5",
-        "semi": false,
-        "singleQuote": true,
-        "no-mixed-spaces-and-tabs": ["error", "smart-tabs"]
+        "endOfLine": "auto"
       }
     ],
-    "no-unused-vars": [
-      "error",
-      { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }
-    ]
+    "import/no-extraneous-dependencies": 0,
+    "react/forbid-prop-types": "off"
   }
 }
