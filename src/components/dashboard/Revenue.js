@@ -36,7 +36,7 @@ function MonthlyRevenue() {
     <CardWithIcon
       to="/invoice"
       icon={DollarIcon}
-      title="MonthlyRevenue"
+      title="Revenue"
       subtitle={value}
     />
   );

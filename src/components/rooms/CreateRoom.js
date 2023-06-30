@@ -46,7 +46,7 @@ function RoomCreate() {
           price: '',
           type: '',
           bed_count: '',
-          status: 'unavailable',
+          status: 'available',
         }}
       >
         <SectionTitle label="No.Rum" />
@@ -72,17 +72,6 @@ function RoomCreate() {
         <SectionTitle label="Bed" />
         <Box>
           <TextInput source="bed_count" validate={validateBedNum} fullWidth />
-        </Box>
-        <SectionTitle label="Rom status" />
-        <Box>
-          <SelectInput
-            source="status"
-            validate={validateRequired}
-            choices={[
-              { id: 'available', name: 'available' },
-              { id: 'unavailable', name: 'unavailable' },
-            ]}
-          />
         </Box>
       </SimpleForm>
     </Create>

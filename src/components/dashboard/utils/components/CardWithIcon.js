@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Card, Box, Typography, Divider } from '@mui/material';
-import { Link, To } from 'react-router-dom';
+import { Card, Box, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import cartouche from '../img/cartouche.png';
 import cartoucheDark from '../img/cartoucheDark.png';

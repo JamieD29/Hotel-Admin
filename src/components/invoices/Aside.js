@@ -1,8 +1,5 @@
 import {
   Box,
-  Card,
-  CardContent,
-  Grid,
   Step,
   StepContent,
   StepLabel,
@@ -11,7 +8,7 @@ import {
 } from '@mui/material';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import React, { useEffect, useState } from 'react';
-import { DateField, useLocaleState } from 'react-admin';
+import { useLocaleState } from 'react-admin';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 

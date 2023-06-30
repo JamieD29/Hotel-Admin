@@ -16,7 +16,10 @@ function GuestTotal() {
         },
       })
       .then((respond) => {
-        setUsers(respond.data);
+        const filteredResponse = respond.data.filter(
+          (otherUser) => otherUser.role === 'guest',
+        );
+        setUsers(filteredResponse);
       })
       .catch((err) => err.message);
   }, []);

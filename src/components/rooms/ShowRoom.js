@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
   Show,
   SimpleShowLayout,
@@ -10,6 +10,7 @@ import { Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 // import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Aside from './Aside';
 
 function SectionTitle({ label }) {
   return (
@@ -38,7 +39,7 @@ function ShowRoom() {
   }
 
   return (
-    <Show title={<RoomType />}>
+    <Show title={<RoomType />} aside={<Aside />}>
       <SimpleShowLayout
         sx={{
           fontSize: '18px',

@@ -10,6 +10,9 @@ const styles = {
   rightCol: { flex: 1, marginLeft: '0.5em' },
   singleCol: { marginTop: '1em', marginBottom: '1em' },
 };
+function Spacer() {
+  return <span style={{ width: '1em' }} />;
+}
 
 export default function Dashboard() {
   return (
@@ -19,6 +22,7 @@ export default function Dashboard() {
       </div>
       <div style={styles.flex}>
         <MonthlyRevenue />
+        <Spacer />
         <GuestToal />
       </div>
     </div>

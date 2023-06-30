@@ -1,25 +1,24 @@
 import React from 'react';
 import {
   Datagrid,
-  EditButton,
-  Link,
   List,
-  ReferenceField,
+  SearchInput,
   ShowButton,
   TextField,
-  TextInput,
 } from 'react-admin';
+// import InvoiceFilterSidebar from './FilterAside';
 
-const RoomFilters = [<TextInput label="Search" source="id" alwaysOn />];
+const InvoiceFilter = [<SearchInput source="invoice_date" alwaysOn />];
 
 function ListInvoice() {
   return (
-    <List filters={RoomFilters}>
-      <Datagrid>
+    <List filters={InvoiceFilter}>
+      <Datagrid optimized rowClick="show">
         <TextField source="id" />
         <TextField source="total_price" />
         <TextField source="invoice_date" />
         <TextField source="user.name" />
+        <TextField source="status" />
         <ShowButton />
       </Datagrid>
     </List>

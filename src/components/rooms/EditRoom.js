@@ -1,7 +1,8 @@
 import React from 'react';
-import { Edit, SimpleForm, TextInput } from 'react-admin';
+import { Edit, SelectInput, SimpleForm, TextInput } from 'react-admin';
 import { Box, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
+import Aside from './Aside';
 
 function SectionTitle({ label }) {
   return (
@@ -39,7 +40,7 @@ const validateRequired = [required()];
 
 function RoomEdit() {
   return (
-    <Edit title="Edit a room information" aside="">
+    <Edit title="Edit a room information" aside={<Aside />}>
       <SimpleForm>
         <TextInput source="id" validate={validateRoomNum} />
         <SectionTitle label="Price" />
@@ -48,7 +49,14 @@ function RoomEdit() {
         </Box>
         <SectionTitle label="Room Type" />
         <Box>
-          <TextInput source="type" validate={validateRequired} fullWidth />
+          <SelectInput
+            source="type"
+            validate={validateRequired}
+            choices={[
+              { id: 'normal', name: 'normal' },
+              { id: 'vip', name: 'vip' },
+            ]}
+          />
         </Box>
         <SectionTitle label="Bed" />
         <Box>
@@ -56,7 +64,14 @@ function RoomEdit() {
         </Box>
         <SectionTitle label="Rom status" />
         <Box>
-          <TextInput source="status" validate={validateRequired} fullWidth />
+          <SelectInput
+            source="status"
+            validate={validateRequired}
+            choices={[
+              { id: 'available', name: 'available' },
+              { id: 'unavailable', name: 'unavailable' },
+            ]}
+          />
         </Box>
       </SimpleForm>
     </Edit>

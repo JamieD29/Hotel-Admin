@@ -10,17 +10,25 @@ import {
 import LockIcon from '@mui/icons-material/Lock';
 import * as React from 'react';
 import { useState } from 'react';
-import { useLogin, useNotify, Form, TextInput } from 'react-admin';
+import {
+  useLogin,
+  useNotify,
+  Form,
+  TextInput,
+  PasswordInput,
+} from 'react-admin';
 
 function MyLoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  // const [role, setRole] = useState('');
   const [loading] = useState(false);
   const login = useLogin();
   const notify = useNotify();
 
   const handleSubmit = () => {
     // will call authProvider.login({ email, password })
+    // localStorage.setItem('role', role);
     login({ email, password }).catch(() => notify('Invalid email or password'));
   };
 
@@ -50,16 +58,6 @@ function MyLoginPage() {
               <LockIcon />
             </Avatar>
           </Box>
-          <Box
-            sx={{
-              marginTop: '1em',
-              display: 'flex',
-              justifyContent: 'center',
-              color: (theme) => theme.palette.grey[500],
-            }}
-          >
-            Hint: abc@gmail.com / 123456
-          </Box>
           <Box sx={{ padding: '0 1em 1em 1em' }}>
             <Box sx={{ marginTop: '1em' }}>
               <Typography variant="h6" gutterBottom>
@@ -78,15 +76,27 @@ function MyLoginPage() {
               <Typography variant="h6" gutterBottom>
                 Password
               </Typography>
-              <TextInput
+              <PasswordInput
                 name="password"
                 placeholder="Enter..."
-                type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 fullWidth
               />
             </Box>
+            {/* <Box sx={{ marginTop: '1em' }}>
+              <Typography variant="h6" gutterBottom>
+                Role
+              </Typography>
+              <TextInput
+                name="role"
+                placeholder="Enter..."
+                type="text"
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+                fullWidth
+              />
+            </Box> */}
           </Box>
           <CardActions sx={{ padding: '0 1em 1em 1em' }}>
             <Button

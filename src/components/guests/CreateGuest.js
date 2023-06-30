@@ -51,7 +51,7 @@ const validateRole = [required()];
 
 function CreateGuest() {
   return (
-    <Create title="Create a Guest">
+    <Create title="Create a user">
       <SimpleForm
         defaultValue={{
           id: 0,
@@ -86,6 +86,8 @@ function CreateGuest() {
             validate={validateRole}
             choices={[
               { id: 'admin', name: 'admin' },
+              { id: 'room manager', name: 'room manager' },
+              { id: 'invoice manager', name: 'invoice manager' },
               { id: 'guest', name: 'guest' },
             ]}
           />

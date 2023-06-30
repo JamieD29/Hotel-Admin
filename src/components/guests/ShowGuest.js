@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import {
   Show,
   SimpleShowLayout,
   useGetRecordId,
   useRecordContext,
   TextField,
+  useShowContext,
+  useGetOne,
 } from 'react-admin';
-import { Box, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-// import axios from 'axios';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Aside from './Aside';
+import DataProvider from '../../dataProvider/dataProvider';
 
 function SectionTitle({ label }) {
   return (
@@ -26,16 +28,28 @@ SectionTitle.propTypes = {
 
 function UserType() {
   const record = useRecordContext();
-  //   console.log(record);
   return <span>User {record ? `"${record.name}"` : ''}</span>;
 }
 
 function ShowGuest() {
   const id = useGetRecordId();
   const navigate = useNavigate();
-
+  const { data: user } = useGetOne('users', { id });
+  const roleUser = localStorage.getItem('role');
+  const role = user?.role;
   if (id === 0) {
     navigate('/users');
+  }
+
+  if (
+    role === roleUser ||
+    (role === 'admin' && roleUser === 'admin') ||
+    (role === 'invoice manager' &&
+      (roleUser === 'invoice manager' || roleUser === 'room manager')) ||
+    (role === 'room manager' &&
+      (roleUser === 'room manager' || roleUser === 'invoice manager'))
+  ) {
+    return null;
   }
 
   return (

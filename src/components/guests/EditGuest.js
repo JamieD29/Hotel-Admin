@@ -7,8 +7,10 @@ import {
   TextInput,
   email,
   useGetRecordId,
+  usePermissions,
   useRecordContext,
 } from 'react-admin';
+import { useNavigate } from 'react-router-dom';
 import { Box, Grid, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import Aside from './Aside';
@@ -66,7 +68,10 @@ const validateRole = [required()];
 
 function EditGuest() {
   const id = useGetRecordId();
-  return (
+  const { permissions } = usePermissions();
+  const navigate = useNavigate();
+
+  const renderEditPage = () => (
     <Edit title={<UserType />} aside={<Aside id={id} />}>
       <SimpleForm>
         <Box width={{ xs: '100%', xl: 800 }}>
@@ -85,10 +90,10 @@ function EditGuest() {
           </Box>
 
           <Grid container spacing={2} width={{ xs: '100%', xl: 800 }}>
-            <Grid item>
+            {/* <Grid item>
               <SectionTitle label="Password" />
               <PasswordInput disabled source="password" fullWidth />
-            </Grid>
+            </Grid> */}
 
             <Grid item>
               <SectionTitle label="Change Password" />
@@ -107,6 +112,8 @@ function EditGuest() {
               validate={validateRole}
               choices={[
                 { id: 'admin', name: 'admin' },
+                { id: 'room manager', name: 'room manager' },
+                { id: 'invoice manager', name: 'invoice manager' },
                 { id: 'guest', name: 'guest' },
               ]}
             />
@@ -115,6 +122,9 @@ function EditGuest() {
       </SimpleForm>
     </Edit>
   );
+  const previousPage = () => navigate(-1);
+
+  return permissions === 'admin' ? renderEditPage() : previousPage();
 }
 
 export default EditGuest;
